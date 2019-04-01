@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:justify-content="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Catalog</title>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+
+</head>
+<body>
+
+<div class="container">
+    <h2>
+        Current Catalog
+    </h2>
+    <hr>
+
+    <div class="row">
+        <form action="#" th:action="@{/collection/searchTitle}" method="get" class="col-sm">
+            <input type="text" th:value="${titleSearch}" name="titleSearch" placeholder="Search by Title"/>
+            <input type="submit" value="Search By Title" class="btn btn-primary btn-sm mb-3">
+        </form>
+
+        <form action="#" th:action="@{/collection/searchAuthor}" method="get" class="col-sm">
+            <input type="text" th:value="${authorSearch}" name="authorSearch" placeholder="Search by Author"/>
+            <input type="submit" value="Search By Author" class="btn btn-primary btn-sm mb-3">
+        </form>
+
+        <form action="#" th:action="@{/collection/searchGenre}" method="get" th:align="right">
+            <!--input type="text" th:value="${genreSearch}" name="genreSearch" placeholder="Search by Genre"/-->
+            <select name="genreSearch">
+                <option th:value="Art" th:text="'Arts & Photography'"></option>
+                <option th:value="Biographies" th:text="'Biographies & Memoirs'"></option>
+                <option th:value="Business" th:text="'Business & Money'"></option>
+                <option th:value="Calendars" th:text="'Calendars'"></option>
+                <option th:value="Children" th:text="'Children'+'s Books'"></option>
+                <option th:value="christian" th:text="'Christian Books & Bibles'"></option>
+                <option th:value="Comics" th:text="'Comics & Graphic Novels'"></option>
+                <option th:value="Computers" th:text="'Computers & Technology'"></option>
+                <option th:value="Cookbooks" th:text="'Cookbooks, Food & Wine'"></option>
+                <option th:value="Crafts" th:text="'Crafts, Hobbies & Home'"></option>
+                <option th:value="engineering" th:text="'Engineering & Transportation'"></option>
+                <option th:value="Health" th:text="'Health & Fitness'"></option>
+                <option th:value="history" th:text="'History'"></option>
+                <option th:value="humor" th:text="'Humor & Entertainment'"></option>
+                <option th:value="Law" th:text="'Law'"></option>
+                <option th:value="literature" th:text="'Literature & Fiction'"></option>
+                <option th:value="medical" th:text="'Medical'"></option>
+                <option th:value="mystery" th:text="'Mystery, Thriller & Suspense'"></option>
+                <option th:value="Politics" th:text="'Politics & Social Sciences'"></option>
+                <option th:value="Reference" th:text="'Reference'"></option>
+                <option th:value="Religion" th:text="'Religion & Spirituality'"></option>
+                <option th:value="Romance" th:text="'Romance'"></option>
+                <option th:value="math" th:text="'Science & Math'"></option>
+                <option th:value="'science fiction'" th:text="'Science Fiction & Fantasy'"></option>
+                <option th:value="Self" th:text="'Self-Help'"></option>
+                <option th:value="Sports" th:text="'Sports & Outdoors'"></option>
+                <option th:value="Teen" th:text="'Teen & Young Adult'"></option>
+                <option th:value="test" th:text="'Test Preparation'"></option>
+                <option th:value="travel" th:text="'Travel'"></option>
+            </select>
+            <input type="submit" value="Search By Genre" class="btn btn-primary btn-sm mb-3">
+        </form>
+    </div>
+
+    <table class="table table-bordered table-striped">
+
+        <thead class="thead-dark">
+        <tr>
+            <th>Cover</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Genre</th>
+            <th>Availability</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="tempTitle : ${titles}">
+            <td><img th:src="${tempTitle.getCover()}" border="3" height="200" width="140"> </td>
+            <td th:text="${tempTitle.getTitle()}"></td>
+            <td th:text="${tempTitle.getAuthor()}"></td>
+            <td th:text="${tempTitle.getGenre()}"></td>
+            <td>
+                <a th:href="@{/books/list(titleId=${tempTitle.getItemId()})}" class="btn btn-primary btn-sm mb-3">
+                    Check Availability
+                </a>
+            </td>
+        </tr>
+        </tbody>
+
+    </table>
+</div>
+
+</body>
+</html>

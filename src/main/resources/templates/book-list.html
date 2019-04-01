@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Book List</title>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+
+</head>
+<body>
+<div class="container">
+    <table class="table table-bordered table-striped">
+
+        <thead class="thead-dark">
+        <tr>
+            <th>Title</th>
+            <th>Status</th>
+            <th>Due Back Date</th>
+            <th>Condition</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="tempBook : ${books}">
+            <td th:text="${tempBook.getItem().getTitle()}"></td>
+            <td th:text="${tempBook.getStatus()}"></td>
+            <td th:text="${tempBook.getDue_date()}"></td>
+            <td th:text="${tempBook.getCondition()}"></td>
+        </tr>
+        </tbody>
+
+    </table>
+</div>
+</body>
+</html>

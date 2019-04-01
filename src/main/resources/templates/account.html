@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Book List</title>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+
+</head>
+<body>
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-sm">
+            <h2>Account Page</h2>
+        </div>
+
+        <div th:align="right">
+            <form action="#" th:action="@{/logout}" method="post" style="text-align: right">
+                <input type="submit" value="Logout"/>
+            </form>
+        </div>
+    </div>
+
+
+<hr>
+
+<h4 style="text-align: center">Account details</h4>
+<table class="table table-bordered table-striped">
+    <thead class="thead-dark">
+    <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Phone Number</th>
+        <th>Contact Preference</th>
+        <th>Balance Due</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr>
+        <td th:text="${user.firstName}"></td>
+        <td th:text="${user.lastName}"></td>
+        <td th:text="${user.username}"></td>
+        <td th:text="${user.email}"></td>
+        <td th:text="${user.phone}"></td>
+        <td th:text="${user.contactPreference}"></td>
+        <td th:text="${user.balance}"></td>
+    </tr>
+    </tbody>
+
+</table>
+
+<br>
+<hr>
+
+<h4 style="text-align: center">Your previously borrowed books</h4>
+<table class="table table-bordered table-striped">
+
+    <thead class="thead-dark">
+    <tr>
+        <th>Cover</th>
+        <th>Title</th>
+        <th>Date</th>
+        <th>Review</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="tempBook : ${history}">
+        <td><img th:src="${tempBook.getItem().getCover()}" border="3" height="200" width="140"> </td>
+        <td th:text="${tempBook.getItem().getTitle()}"></td>
+        <td th:text="${tempBook.date}"></td>
+        <!-- if user already reviewed the book -->
+        <!-- need to add functionality to allow user to see their review -->
+        <td>
+            <div th:if="${#lists.contains(titleIds, tempBook.getItem().getItemId())}">
+                <!-- add a message for users to view their previous reviews -->
+            </div>
+            <div th:unless="${#lists.contains(titleIds, tempBook.getItem().getItemId())}">
+                <a th:href="@{/reviews/reviewForm(userId=${user.username}, titleId=${tempBook.getItem().getItemId()})}" class="btn btn-primary btn-sm mb-3">
+                    Review this book
+                </a>
+            </div>
+        </td>
+    </tr>
+    </tbody>
+
+</table>
+
+</div>
+</body>
+</html>

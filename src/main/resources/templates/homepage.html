@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>Home Page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+</head>
+<body>
+
+    <h1>Welcome to our new library system!</h1>
+
+    <a th:href="@{/user/accountPage}" class="btn btn-primary btn-sm mb-3">
+        Account page
+    </a>
+
+    <hr>
+
+    <a th:href="@{/collection/list}" class="btn btn-primary btn-sm mb-3">
+        Browse Books
+    </a>
+
+    <a th:href="@{/recommended/recommendedBooks}" class="btn btn-primary btn-sm mb-3">
+        Browse Recommended Books
+    </a>
+
+
+    <div th:fragment="logout" class="logout" sec:authorize="isAuthenticated()">
+        Logged in user: <span sec:authentication="name"></span> |
+        Roles: <span sec:authentication="principal.authorities"></span>
+        <div>
+            <form action="#" th:action="@{/logout}" method="post">
+                <input type="submit" value="Logout"/>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>
