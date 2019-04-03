@@ -56,13 +56,15 @@ public class User {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "reviewId.user", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     private List<Review> reviewList;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    private List<ReservedBook> reservedBookList;
 
     // Constructors
 
     public User(){
     }
 
-    public User(@NotNull String username, @NotNull String password, @NotNull int enabled, String email, String phone, String contactPreference, String firstName, String lastName, BigDecimal balance, List<BorrowedBook> borrowedBookList, List<Review> reviewList) {
+    public User(@NotNull String username, @NotNull String password, @NotNull int enabled, String email, String phone, String contactPreference, String firstName, String lastName, BigDecimal balance, List<BorrowedBook> borrowedBookList, List<Review> reviewList, List<ReservedBook> reservedBookList) {
         this.username = username;
         this.password = password;
         this.enabled = enabled;
@@ -74,6 +76,7 @@ public class User {
         this.balance = balance;
         this.borrowedBookList = borrowedBookList;
         this.reviewList = reviewList;
+        this.reservedBookList = reservedBookList;
     }
 
     // Getters and setters
@@ -174,10 +177,18 @@ public class User {
         this.userId = userId;
     }
 
+    public List<ReservedBook> getReservedBookList() {
+        return reservedBookList;
+    }
+
+    public void setReservedBookList(List<ReservedBook> reservedBookList) {
+        this.reservedBookList = reservedBookList;
+    }
+
     @Override
     public String toString() {
         return "User{" +
-                "user_id=" + userId +
+                "userId=" + userId +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", enabled=" + enabled +
@@ -189,6 +200,7 @@ public class User {
                 ", balance=" + balance +
                 ", borrowedBookList=" + borrowedBookList +
                 ", reviewList=" + reviewList +
+                ", reservedBookList=" + reservedBookList +
                 '}';
     }
 }

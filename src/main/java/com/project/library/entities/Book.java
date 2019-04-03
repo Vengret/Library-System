@@ -9,6 +9,7 @@ package com.project.library.entities;
 import org.springframework.stereotype.Controller;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "book")
@@ -36,16 +37,19 @@ public class Book {
     @Column(name = "condition")
     private String condition;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "book", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    private List<ReservedBook> reservedBookList;
 
     // Constructors
 
     public Book(){}
 
-    public Book(Item item, String status, String due_date, String condition) {
+    public Book(Item item, String status, String due_date, String condition, List<ReservedBook> reservedBookList) {
         this.item = item;
         this.status = status;
         this.due_date = due_date;
         this.condition = condition;
+        this.reservedBookList = reservedBookList;
     }
 
     // getters and setters
@@ -91,6 +95,14 @@ public class Book {
         this.condition = condition;
     }
 
+    public List<ReservedBook> getReservedBookList() {
+        return reservedBookList;
+    }
+
+    public void setReservedBookList(List<ReservedBook> reservedBookList) {
+        this.reservedBookList = reservedBookList;
+    }
+
     @Override
     public String toString() {
         return "Book{" +
@@ -99,6 +111,7 @@ public class Book {
                 ", status='" + status + '\'' +
                 ", due_date='" + due_date + '\'' +
                 ", condition='" + condition + '\'' +
+                ", reservedBookList=" + reservedBookList +
                 '}';
     }
 }
