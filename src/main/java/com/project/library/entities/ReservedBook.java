@@ -5,19 +5,20 @@ import javax.persistence.*;
 @Entity
 @Table(name = "reserved_books")
 public class ReservedBook {
-    @Id@GeneratedValue(strategy = GenerationType.AUTO)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
 
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "userId")
     private User user;
 
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    @JoinColumn(name = "book_id")
+    @JoinColumn(name = "bookId")
     private Book book;
 
-    // Contructors
+    // Constructors
     public ReservedBook(){}
 
     public ReservedBook(User user, Book book) {

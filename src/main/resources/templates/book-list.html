@@ -22,7 +22,7 @@
             <th>Title</th>
             <th>Status</th>
             <th>Due Back Date</th>
-            <th>Condition</th>
+            <th>Reserve</th>
         </tr>
         </thead>
 
@@ -31,7 +31,11 @@
             <td th:text="${tempBook.getItem().getTitle()}"></td>
             <td th:text="${tempBook.getStatus()}"></td>
             <td th:text="${tempBook.getDue_date()}"></td>
-            <td th:text="${tempBook.getCondition()}"></td>
+            <td>
+                <a th:href="@{/reserved/confirmation(bookId = ${tempBook.getId()})}" class="btn btn-primary btn-sm mb-3">
+                    Reserve this book
+                </a>
+            </td>
         </tr>
         </tbody>
 

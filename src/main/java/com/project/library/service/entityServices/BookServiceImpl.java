@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BookServiceImpl implements BookService {
@@ -26,7 +27,22 @@ public class BookServiceImpl implements BookService {
         return bookRepository.findByItem_ItemId(titleId);
     }
 
+    @Override
+    public Book findById(int id){
+        // Search for book
+        Optional<Book> result = bookRepository.findById(id);
 
+        // In case the book isn't found
+        Book theBook = null;
+        if(result.isPresent()){
+            theBook = result.get();
+        }
+        else {
+            throw new RuntimeException("Did not find the book");
+        }
+
+        return theBook;
+    }
 
 
 }
