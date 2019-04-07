@@ -4,10 +4,9 @@ Request mapping for all pages related to users
 
 package com.project.library.controller;
 
-import com.project.library.entities.BorrowedBook;
-import com.project.library.entities.Review;
-import com.project.library.entities.User;
+import com.project.library.entities.*;
 import com.project.library.service.entityServices.BorrowedBookService;
+import com.project.library.service.entityServices.ReservedBookService;
 import com.project.library.service.entityServices.ReviewService;
 import com.project.library.service.entityServices.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,10 +27,12 @@ public class UserController {
     private UserService userService;
     private BorrowedBookService borrowedBookService;
     private ReviewService reviewService;
-    @Autowired UserController(UserService theUserService, BorrowedBookService theBorrowedBookService, ReviewService theReviewService){
+    private ReservedBookService reservedBookService;
+    @Autowired UserController(UserService theUserService, BorrowedBookService theBorrowedBookService, ReviewService theReviewService, ReservedBookService theReservedBookService){
         userService = theUserService;
         borrowedBookService = theBorrowedBookService;
         reviewService = theReviewService;
+        reservedBookService = theReservedBookService;
     }
 
     // Maps to an account main page
@@ -64,6 +65,10 @@ public class UserController {
             titleIds.add(temp.getReviewId().getItem().getItemId());
         }
         theModel.addAttribute("titleIds", titleIds);
+
+        // Get list of reserved books
+        List<ReservedBook> reservedBooks = reservedBookService.findByUser_Username(principal.getName());
+        theModel.addAttribute("reserved", reservedBooks);
 
         return "/account";
     }
