@@ -21,7 +21,6 @@
         <tr>
             <th>Title</th>
             <th>Status</th>
-            <th>Due Back Date</th>
             <th>Reserve</th>
         </tr>
         </thead>
@@ -29,12 +28,23 @@
         <tbody>
         <tr th:each="tempBook : ${books}">
             <td th:text="${tempBook.getItem().getTitle()}"></td>
-            <td th:text="${tempBook.getStatus()}"></td>
-            <td th:text="${tempBook.getDue_date()}"></td>
             <td>
-                <a th:href="@{/reserved/confirmation(bookId = ${tempBook.getId()})}" class="btn btn-primary btn-sm mb-3">
+                <span th:text="${tempBook.getStatus()}"></span>
+                <br>
+                <div th:if="${tempBook.getStatus()} == out">
+                    Due back:
+                    <span th:text="${tempBook.getDue_date()}"></span>
+                </div>
+            </td>
+            <td>
+                <div th:if="${tempBook.getStatus()} == in-stock">
+                    <a th:href="@{/reserved/confirmation(bookId = ${tempBook.getId()})}" class="btn btn-primary btn-sm mb-3">
                     Reserve this book
-                </a>
+                    </a>
+                </div>
+                <div th:unless="${tempBook.getStatus()} == in-stock">
+                    Not available at this time
+                </div>
             </td>
         </tr>
         </tbody>
