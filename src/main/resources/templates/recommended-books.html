@@ -40,7 +40,7 @@
             <td th:text="${tempItem.getAuthor()}"></td>
             <td th:text="${tempItem.getGenre()}"></td>
             <td>
-                <a th:href="@{/books/list(titleId=${tempItem.getItemId()})}" class="btn btn-primary btn-sm mb-3">
+                <a th:href="@{/books/list(itemId=${tempItem.getItemId()})}" class="btn btn-primary btn-sm mb-3">
                     Check Availability
                 </a>
             </td>

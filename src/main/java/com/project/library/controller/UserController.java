@@ -56,15 +56,15 @@ public class UserController {
         List<BorrowedBook> history = borrowedBookService.findByUser_UsernameOrderByDateDesc(username);
         theModel.addAttribute("history", history);
 
-        // We need to get which titles the user has reviewed so we know to give them a link to add a review or see their review
+        // We need to get which items the user has reviewed so we know to give them a link to add a review or see their review
         // Get list of user's reviews
         List<Review> reviews = reviewService.findByReviewId_User_User_id(userId);
-        // get list of titles from list of reviews
-        List<Integer> titleIds = new ArrayList<>();
+        // get list of items from list of reviews
+        List<Integer> itemIds = new ArrayList<>();
         for (Review temp : reviews){
-            titleIds.add(temp.getReviewId().getItem().getItemId());
+            itemIds.add(temp.getReviewId().getItem().getItemId());
         }
-        theModel.addAttribute("titleIds", titleIds);
+        theModel.addAttribute("itemIds", itemIds);
 
         // Get list of reserved books
         List<ReservedBook> reservedBooks = reservedBookService.findByUser_Username(principal.getName());

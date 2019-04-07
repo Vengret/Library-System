@@ -9,7 +9,7 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface BookRepository extends JpaRepository<Book, Integer> {
-    List<Book> findByItem_ItemId(int titleId); // gives a way to search for a book based on items's id
+    List<Book> findByItem_ItemId(int itemId); // gives a way to search for a book based on items's id
 
     // Method for updating the status of a book
     @Modifying

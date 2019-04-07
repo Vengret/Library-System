@@ -52,7 +52,7 @@ public class RecommenderServiceImpl implements RecommenderService {
         // uses our model, neighborhood, and similarity to create a recommender
         UserBasedRecommender recommender = new GenericBooleanPrefUserBasedRecommender(model, neighborhood, similarity);
 
-        // Get list of recommended titles
+        // Get list of recommended items
         List<RecommendedItem> recommendations = recommender.recommend(userId, 10); // adjust i to change number of recommended items
 
         // create list of Items from list of RecommendedItem (a Mahout specific object, not an actual Item object)

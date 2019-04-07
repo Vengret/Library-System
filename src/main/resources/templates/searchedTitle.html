@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title List</title>
+    <title>Item List</title>
 
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -34,13 +34,13 @@
         </thead>
 
         <tbody>
-        <tr th:each="tempTitle : ${titles}">
-            <td><img th:src="${tempTitle.getCover()}" border="3" height="200" width="140"> </td>
-            <td th:text="${tempTitle.getTitle()}"></td>
-            <td th:text="${tempTitle.getAuthor()}"></td>
-            <td th:text="${tempTitle.getGenre()}"></td>
+        <tr th:each="tempItem : ${items}">
+            <td><img th:src="${tempItem.getCover()}" border="3" height="200" width="140"> </td>
+            <td th:text="${tempItem.getTitle()}"></td>
+            <td th:text="${tempItem.getAuthor()}"></td>
+            <td th:text="${tempItem.getGenre()}"></td>
             <td>
-                <a th:href="@{/books/list(titleId=${tempTitle.getId()})}" class="btn btn-primary btn-sm mb-3">
+                <a th:href="@{/books/list(titleId=${tempItem.getId()})}" class="btn btn-primary btn-sm mb-3">
                     Check Availability
                 </a>
             </td>

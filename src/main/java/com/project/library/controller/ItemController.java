@@ -16,51 +16,47 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.Collections;
 import java.util.List;
 
-// ******************************************
-// TODO: Title class was changed to Item. Make all comments and variable names relfect this change
-// ******************************************
-
 @Controller
 @RequestMapping("/collection")
 public class ItemController {
 
-    // Autowire a TitleService
+    // Autowire a ItemService
     private ItemService itemService;
     @Autowired
     public ItemController(ItemService theItemService){itemService = theItemService;}
 
-    // Get a complete list of available titles
+    // Get a complete list of available items
     @GetMapping("list")
-    public String listTitles(Model theModel){
+    public String listItems(Model theModel){
 
-        // Get the list of available titles
+        // Get the list of available items
         // Shuffle them so that users see a random books at the top each time instead of the same ones all the time
-        List<Item> titles = itemService.findAll();
-        Collections.shuffle(titles);
+        List<Item> items = itemService.findAll();
+        Collections.shuffle(items);
 
-        // Add the list of titles to the model
-        theModel.addAttribute("titles", titles);
+        // Add the list of items to the model
+        theModel.addAttribute("items", items);
 
-        return "title-list";
+        return "item-list";
     }
 
-    // Allows the users to search by a title
-    // Sends user back to title-list page with defined list
+    // Allows the users to search by a item
+    // Sends user back to item-list page with defined list
     @GetMapping("searchTitle")
     public String searchTitle(Model theModel, @RequestParam String titleSearch){
 
-        // Search for titles based on the user's input
-        List<Item> titleList = itemService.findByTitleContainingIgnoreCase(titleSearch);
+        // Search for items based on the user's input
+        List<Item> itemList = itemService.findByTitleContainingIgnoreCase(titleSearch);
 
         // Exception handling if nothing is returned
-        if (titleList == null){
+        if (itemList == null){
             throw new RuntimeException("No books found with that title");
         }
 
         // Add list of titles to the model
-        theModel.addAttribute("titles", titleList);
+        theModel.addAttribute("items", itemList);
 
-        return "title-list";
+        return "item-list";
     }
 
     // Allows users to search by an author's name
@@ -68,37 +64,37 @@ public class ItemController {
     @GetMapping("searchAuthor")
     public String searchAuthor(Model theModel, @RequestParam String authorSearch){
 
-        // Search for titles based on author's name
-        List<Item> titleList = itemService.findByAuthorContainingIgnoreCase(authorSearch);
+        // Search for items based on author's name
+        List<Item> itemList = itemService.findByAuthorContainingIgnoreCase(authorSearch);
 
         // Exception handling if nothing is returned
-        if (titleList == null){
-            throw new RuntimeException("No books found with that title");
+        if (itemList == null){
+            throw new RuntimeException("No books found with that author");
         }
 
-        // Add list of titles to the model
-        theModel.addAttribute("titles", titleList);
+        // Add list of items to the model
+        theModel.addAttribute("items", itemList);
 
-        return "title-list";
+        return "item-list";
     }
 
     // Allows users to search by genre
-    // Sends user back to title-list page with defined list
+    // Sends user back to item-list page with defined list
     @GetMapping("searchGenre")
     public String searchGenre(Model theModel, @RequestParam String genreSearch){
 
-        // Search for titles based on genre
-        List<Item> titleList = itemService.findByGenreContainingIgnoreCase(genreSearch);
+        // Search for items based on genre
+        List<Item> itemList = itemService.findByGenreContainingIgnoreCase(genreSearch);
 
         // Exception handling if nothing is returned
-        if (titleList == null){
-            throw new RuntimeException("No books found with that title");
+        if (itemList == null){
+            throw new RuntimeException("No books found with that genre");
         }
 
-        // Add list of titles to the model
-        theModel.addAttribute("titles", titleList);
+        // Add list of items to the model
+        theModel.addAttribute("items", itemList);
 
-        return "title-list";
+        return "item-list";
     }
 
 }

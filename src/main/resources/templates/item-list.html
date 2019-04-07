@@ -82,13 +82,13 @@
         </thead>
 
         <tbody>
-        <tr th:each="tempTitle : ${titles}">
-            <td><img th:src="${tempTitle.getCover()}" border="3" height="200" width="140"> </td>
-            <td th:text="${tempTitle.getTitle()}"></td>
-            <td th:text="${tempTitle.getAuthor()}"></td>
-            <td th:text="${tempTitle.getGenre()}"></td>
+        <tr th:each="tempItem : ${items}">
+            <td><img th:src="${tempItem.getCover()}" border="3" height="200" width="140"> </td>
+            <td th:text="${tempItem.getTitle()}"></td>
+            <td th:text="${tempItem.getAuthor()}"></td>
+            <td th:text="${tempItem.getGenre()}"></td>
             <td>
-                <a th:href="@{/books/list(titleId=${tempTitle.getItemId()})}" class="btn btn-primary btn-sm mb-3">
+                <a th:href="@{/books/list(itemId=${tempItem.getItemId()})}" class="btn btn-primary btn-sm mb-3">
                     Check Availability
                 </a>
             </td>

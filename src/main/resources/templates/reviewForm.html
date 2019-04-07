@@ -16,7 +16,7 @@
 </head>
 <body>
 
-    <form action="#" th:action="@{/reviews/confirmReview(userId=${userId}, titleId=${titleId})}" th:object="${reviewObject}" method="post">
+    <form action="#" th:action="@{/reviews/confirmReview(userId=${userId}, itemId=${itemId})}" th:object="${reviewObject}" method="post">
         <p>Value:
             <select th:field="*{value}">
                 <option th:each="i : ${#numbers.sequence(1,5)}" th:value="${i}" th:text="${i}"></option>

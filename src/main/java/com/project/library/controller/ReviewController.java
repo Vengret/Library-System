@@ -1,6 +1,5 @@
 /*
 Request mappings for all pages related to reviews
-TODO: Add page for users to add reviews
 TODO: Add page to see reviews for a given title
  */
 
@@ -32,24 +31,14 @@ public class ReviewController {
         userService = theUserService;
     }
 
-    // This is just a test page created to confirm that program is working friendly with this review object
-    // TODO: delete this mapping and page when other pages are setup
-    @GetMapping("testList")
-    public String testListReviews(Model theModel){
-        List<Review> reviews = reviewService.findAll();
-        theModel.addAttribute("reviews", reviews);
-
-        return "testReviews";
-    }
-
-    // Sends the user to a form to create a review for a title
+    // Sends the user to a form to create a review for a item
     @GetMapping("reviewForm")
-    public String reviewForm(Model theModel, @RequestParam("titleId") int titleId, @RequestParam("userId") String userId){
+    public String reviewForm(Model theModel, @RequestParam("itemId") int itemId, @RequestParam("userId") String userId){
 
         // Add attributes
         theModel.addAttribute("review", new Review()); // TODO: test if this is obsolete
         theModel.addAttribute("userId", userId);
-        theModel.addAttribute("titleId", titleId);
+        theModel.addAttribute("itemId", itemId);
         theModel.addAttribute("reviewObject", new ReviewFormObject()); // Added to model to capture form data
 
         return "reviewForm";
@@ -57,16 +46,16 @@ public class ReviewController {
 
     // Saves review
     // TODO: Create new view-review page where users can view/edit their reviews at any time.
-    // TODO: There should be a way to use  Jackson dependency to make this easier and better than tracking titleId and userId through so many handoffs
+    // TODO: There should be a way to use  Jackson dependency to make this easier and better than tracking itemId and userId through so many handoffs
     @PostMapping("confirmReview")
-    public String confirmReview(Model theModel, @RequestParam("titleId") int titleId, @RequestParam("userId") String userId, @ModelAttribute ReviewFormObject reviewFormObject){
+    public String confirmReview(Model theModel, @RequestParam("itemId") int itemId, @RequestParam("userId") String userId, @ModelAttribute ReviewFormObject reviewFormObject){
 
-        // Get user and title
+        // Get user and item
         User user = userService.findByUsername(userId);
-        Item title = itemService.findById(titleId);
+        Item item = itemService.findById(itemId);
 
         // Create review object
-        Review theReview = new Review(new ReviewId(user, title), (float) reviewFormObject.getValue(), reviewFormObject.getContent());
+        Review theReview = new Review(new ReviewId(user, item), (float) reviewFormObject.getValue(), reviewFormObject.getContent());
 
         // save review to database
         reviewService.createReview(theReview);

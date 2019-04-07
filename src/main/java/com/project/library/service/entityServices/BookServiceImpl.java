@@ -22,10 +22,9 @@ public class BookServiceImpl implements BookService {
     public BookServiceImpl(BookRepository theBookRepository){bookRepository = theBookRepository;}
 
     // Search for books based on associated itemId
-    // TODO: title class was changed to item class. update the variable names
     @Override
-    public List<Book> findByItem_ItemId(int titleId) {
-        return bookRepository.findByItem_ItemId(titleId);
+    public List<Book> findByItem_ItemId(int itemId) {
+        return bookRepository.findByItem_ItemId(itemId);
     }
 
     @Override

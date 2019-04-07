@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Table(name = "review")
 public class Review {
     // Embedded Id allows the table to have a composite primary key
-    // ReviewID consists of User user and Title title
+    // ReviewID consists of User user and Item item
     @EmbeddedId
     private ReviewId reviewId;
 

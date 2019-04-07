@@ -18,7 +18,7 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public Item findById(int itemId) {
-        // Search for the Title based on username
+        // Search for the item based on username
         Optional<Item> result = itemRepository.findById(itemId);
 
         // In case the user isn't found, throw runtime exception
@@ -27,7 +27,7 @@ public class ItemServiceImpl implements ItemService {
             theItem = result.get();
         }
         else {
-            throw new RuntimeException("Did not find title id");
+            throw new RuntimeException("Did not find item id");
         }
 
         return theItem;

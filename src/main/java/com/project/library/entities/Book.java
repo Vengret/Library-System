@@ -1,6 +1,6 @@
 /*
 Book entity tracks each individual book
-For example, if the library has 5 copies of the same book, there will be one title and five books creating a ManyToOne relationship
+For example, if the library has 5 copies of the same book, there will be one item and five books creating a ManyToOne relationship
  */
 
 

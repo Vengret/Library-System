@@ -104,11 +104,11 @@
             <!-- if user already reviewed the book -->
             <!-- need to add functionality to allow user to see their review -->
             <td>
-                <div th:if="${#lists.contains(titleIds, tempBook.getItem().getItemId())}">
+                <div th:if="${#lists.contains(itemIds, tempBook.getItem().getItemId())}">
                     <!-- add a message for users to view their previous reviews -->
                 </div>
-                <div th:unless="${#lists.contains(titleIds, tempBook.getItem().getItemId())}">
-                    <a th:href="@{/reviews/reviewForm(userId=${user.username}, titleId=${tempBook.getItem().getItemId()})}" class="btn btn-primary btn-sm mb-3">
+                <div th:unless="${#lists.contains(itemIds, tempBook.getItem().getItemId())}">
+                    <a th:href="@{/reviews/reviewForm(userId=${user.username}, itemId=${tempBook.getItem().getItemId()})}" class="btn btn-primary btn-sm mb-3">
                         Review this book
                     </a>
                 </div>

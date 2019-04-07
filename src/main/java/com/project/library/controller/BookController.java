@@ -22,15 +22,15 @@ public class BookController {
     @Autowired
     public BookController(BookService theBookService){bookService = theBookService;}
 
-    // Return a list of books based on TitleId
+    // Return a list of books based on ItemId
     @GetMapping("/list")
-    public String getBooks(Model theModel, @RequestParam("titleId") int titleId){
+    public String getBooks(Model theModel, @RequestParam("itemId") int itemId){
 
         // Retrieve list of books
-        List<Book> bookList = bookService.findByItem_ItemId(titleId);
+        List<Book> bookList = bookService.findByItem_ItemId(itemId);
 
         if (bookList == null){
-            throw new RuntimeException("No books for this title on record");
+            throw new RuntimeException("No books for this item on record");
         }
 
         // Add the list of books to the model under the name books
