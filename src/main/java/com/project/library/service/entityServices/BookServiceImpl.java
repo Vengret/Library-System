@@ -8,6 +8,7 @@ import com.project.library.DAOs.BookRepository;
 import com.project.library.entities.Book;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -42,6 +43,17 @@ public class BookServiceImpl implements BookService {
         }
 
         return theBook;
+    }
+
+    @Override
+    @Transactional
+    public void setStatus(int bookId, String status) {
+        bookRepository.updateStatus(bookId, status);
+    }
+
+    @Override
+    public void updateBook(int bookId, String status, String dueDate, String condition) {
+        bookRepository.updateBook(bookId, status, dueDate, condition);
     }
 
 

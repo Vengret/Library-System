@@ -44,6 +44,9 @@ public class ReservedController {
         // save object to database
         ReservedBook confirmation = reservedBookService.createReservation(reservedBook);
 
+        // update status of book to reserved
+        bookService.setStatus(bookId, "Reserved");
+
         // add attributes
         theModel.addAttribute("reservation", confirmation);
 

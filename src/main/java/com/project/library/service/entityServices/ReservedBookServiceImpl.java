@@ -28,7 +28,7 @@ public class ReservedBookServiceImpl implements ReservedBookService{
 
     @Override
     public ReservedBook createReservation(ReservedBook reservedBook) {
-        return reservedBookRepository.save(reservedBook);
+        return reservedBookRepository.saveAndFlush(reservedBook);
     }
 
 }
