@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface BorrowedBookService {
     List<BorrowedBook> findByUser_UsernameOrderByDateDesc(String username);
+    BorrowedBook createBorrowedBook(BorrowedBook borrowedBook);
 }

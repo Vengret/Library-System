@@ -8,6 +8,7 @@ import com.project.library.DAOs.BorrowedBookRepository;
 import com.project.library.entities.BorrowedBook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -24,5 +25,11 @@ public class BorrowedBookServiceImpl implements BorrowedBookService{
     public List<BorrowedBook> findByUser_UsernameOrderByDateDesc(String username) {
         List<BorrowedBook> borrowedBooks = borrowedBookRepository.findByUser_UsernameOrderByDateDesc(username);
         return borrowedBooks;
+    }
+
+    @Override
+    @Transactional
+    public BorrowedBook createBorrowedBook(BorrowedBook borrowedBook) {
+        return borrowedBookRepository.saveAndFlush(borrowedBook);
     }
 }

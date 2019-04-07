@@ -4,6 +4,7 @@ import com.project.library.DAOs.ReservedBookRepository;
 import com.project.library.entities.ReservedBook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -27,8 +28,15 @@ public class ReservedBookServiceImpl implements ReservedBookService{
     }
 
     @Override
+    @Transactional
     public ReservedBook createReservation(ReservedBook reservedBook) {
         return reservedBookRepository.saveAndFlush(reservedBook);
+    }
+
+    @Override
+    @Transactional
+    public void deleteByBook_Id(int bookId) {
+        reservedBookRepository.deleteByBook_Id(bookId);
     }
 
 }

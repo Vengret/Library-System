@@ -19,7 +19,7 @@ public interface BookRepository extends JpaRepository<Book, Integer> {
     // Method for updating all book fields
     // ItemId should never change, so isn't included here
     @Modifying
-    @Query("UPDATE Book b SET b.status = :status, b.due_date = :due_date, b.condition = :condition WHERE b.id = :bookId")
-    int updateBook(@Param("bookId") int bookId, @Param("status") String status, @Param("due_date") String due_date, @Param("condition") String condition);
+    @Query("UPDATE Book b SET b.status = :status, b.due_date = :due_date WHERE b.id = :bookId")
+    int updateBook(@Param("bookId") int bookId, @Param("status") String status, @Param("due_date") String due_date);
 
 }

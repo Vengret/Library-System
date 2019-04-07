@@ -51,8 +51,9 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public void updateBook(int bookId, String status, String dueDate, String condition) {
-        bookRepository.updateBook(bookId, status, dueDate, condition);
+    @Transactional
+    public void updateBook(int bookId, String status, String dueDate) {
+        bookRepository.updateBook(bookId, status, dueDate);
     }
 
 

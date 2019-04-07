@@ -26,8 +26,8 @@ public class CheckedOutBook {
         this.book = book;
     }
 
-    // Getters and setters
 
+    // Getters and setters
 
     public int getId() {
         return id;
