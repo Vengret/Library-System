@@ -69,12 +69,13 @@ public class EmployeeController {
             checkedOutBookService.createCheckedOutBook(checkedOutBook);
 
             // create due date
+            // TODO: update this method of creating a due date. Java 8 has a better method
             int noOfDays = 7; // how long users can rent a book. change this variable to change terms
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(new Date());
             calendar.add(Calendar.DAY_OF_YEAR, noOfDays);
             SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy"); // how to format date
-            String dueDate = dateFormat.format(new Date());
+            String dueDate = dateFormat.format(calendar.getTime());
 
             // update book status and due date
             bookService.updateBook(bookId, "Checked Out", dueDate);
