@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.List;
 
 @Controller
 @RequestMapping("/reserved")
@@ -45,6 +46,10 @@ public class ReservedController {
 
         // add attributes
         theModel.addAttribute("reservation", confirmation);
+
+        // Get list of reserved books
+        List<ReservedBook> reservedBooks = reservedBookService.findByUser_Username(principal.getName());
+        theModel.addAttribute("reserved", reservedBooks);
 
         return "reservation-confirmation";
     }
