@@ -40,16 +40,20 @@ public class Book {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "book", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     private List<ReservedBook> reservedBookList;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "book", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    private List<CheckedOutBook> checkedOutBooks;
+
     // Constructors
 
     public Book(){}
 
-    public Book(Item item, String status, String due_date, String condition, List<ReservedBook> reservedBookList) {
+    public Book(Item item, String status, String due_date, String condition, List<ReservedBook> reservedBookList, List<CheckedOutBook> checkedOutBooks) {
         this.item = item;
         this.status = status;
         this.due_date = due_date;
         this.condition = condition;
         this.reservedBookList = reservedBookList;
+        this.checkedOutBooks = checkedOutBooks;
     }
 
     // getters and setters
@@ -103,6 +107,14 @@ public class Book {
         this.reservedBookList = reservedBookList;
     }
 
+    public List<CheckedOutBook> getCheckedOutBooks() {
+        return checkedOutBooks;
+    }
+
+    public void setCheckedOutBooks(List<CheckedOutBook> checkedOutBooks) {
+        this.checkedOutBooks = checkedOutBooks;
+    }
+
     @Override
     public String toString() {
         return "Book{" +
@@ -112,6 +124,7 @@ public class Book {
                 ", due_date='" + due_date + '\'' +
                 ", condition='" + condition + '\'' +
                 ", reservedBookList=" + reservedBookList +
+                ", checkedOutBooks=" + checkedOutBooks +
                 '}';
     }
 }

@@ -59,6 +59,30 @@
 
     </table>
 
+        <br>
+        <hr>
+
+        <h4 style="text-align: center">Currently checked out books</h4>
+        <table class="table table-bordered table-striped">
+
+            <thead class="thead-dark">
+            <tr>
+                <th>Cover</th>
+                <th>Title</th>
+                <th>Due Back</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr th:each="tempBook : ${checkedBooks}">
+                <td><img th:src="${tempBook.getBook().getItem().getCover()}" border="3" height="200" width="140"> </td>
+                <td th:text="${tempBook.getBook().getItem().getTitle()}"></td>
+                <td th:text="${tempBook.getBook().getDue_date()}"></td>
+            </tr>
+            </tbody>
+
+        </table>
+
     <br>
     <hr>
 

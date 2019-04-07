@@ -59,12 +59,15 @@ public class User {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     private List<ReservedBook> reservedBookList;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    private List<CheckedOutBook> checkedOutBooks;
+
     // Constructors
 
     public User(){
     }
 
-    public User(@NotNull String username, @NotNull String password, @NotNull int enabled, String email, String phone, String contactPreference, String firstName, String lastName, BigDecimal balance, List<BorrowedBook> borrowedBookList, List<Review> reviewList, List<ReservedBook> reservedBookList) {
+    public User(@NotNull String username, @NotNull String password, @NotNull int enabled, String email, String phone, String contactPreference, String firstName, String lastName, BigDecimal balance, List<BorrowedBook> borrowedBookList, List<Review> reviewList, List<ReservedBook> reservedBookList, List<CheckedOutBook> checkedOutBooks) {
         this.username = username;
         this.password = password;
         this.enabled = enabled;
@@ -77,6 +80,7 @@ public class User {
         this.borrowedBookList = borrowedBookList;
         this.reviewList = reviewList;
         this.reservedBookList = reservedBookList;
+        this.checkedOutBooks = checkedOutBooks;
     }
 
     // Getters and setters
@@ -185,6 +189,14 @@ public class User {
         this.reservedBookList = reservedBookList;
     }
 
+    public List<CheckedOutBook> getCheckedOutBooks() {
+        return checkedOutBooks;
+    }
+
+    public void setCheckedOutBooks(List<CheckedOutBook> checkedOutBooks) {
+        this.checkedOutBooks = checkedOutBooks;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -201,6 +213,7 @@ public class User {
                 ", borrowedBookList=" + borrowedBookList +
                 ", reviewList=" + reviewList +
                 ", reservedBookList=" + reservedBookList +
+                ", checkedOutBooks=" + checkedOutBooks +
                 '}';
     }
 }

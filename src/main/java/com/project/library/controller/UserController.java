@@ -5,10 +5,7 @@ Request mapping for all pages related to users
 package com.project.library.controller;
 
 import com.project.library.entities.*;
-import com.project.library.service.entityServices.BorrowedBookService;
-import com.project.library.service.entityServices.ReservedBookService;
-import com.project.library.service.entityServices.ReviewService;
-import com.project.library.service.entityServices.UserService;
+import com.project.library.service.entityServices.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,11 +25,13 @@ public class UserController {
     private BorrowedBookService borrowedBookService;
     private ReviewService reviewService;
     private ReservedBookService reservedBookService;
-    @Autowired UserController(UserService theUserService, BorrowedBookService theBorrowedBookService, ReviewService theReviewService, ReservedBookService theReservedBookService){
+    private CheckedOutBookService checkedOutBookService;
+    @Autowired UserController(UserService theUserService, BorrowedBookService theBorrowedBookService, ReviewService theReviewService, ReservedBookService theReservedBookService, CheckedOutBookService theCheckedOutBookService){
         userService = theUserService;
         borrowedBookService = theBorrowedBookService;
         reviewService = theReviewService;
         reservedBookService = theReservedBookService;
+        checkedOutBookService = theCheckedOutBookService;
     }
 
     // Maps to an account main page
@@ -69,6 +68,10 @@ public class UserController {
         // Get list of reserved books
         List<ReservedBook> reservedBooks = reservedBookService.findByUser_Username(principal.getName());
         theModel.addAttribute("reserved", reservedBooks);
+
+        // Get list of checked out books
+        List<CheckedOutBook> checkedOutBooks = checkedOutBookService.findByUser_Username(principal.getName());
+        theModel.addAttribute("checkedBooks", checkedOutBooks);
 
         return "/account";
     }
