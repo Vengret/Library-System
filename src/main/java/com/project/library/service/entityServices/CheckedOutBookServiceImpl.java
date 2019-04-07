@@ -33,4 +33,9 @@ public class CheckedOutBookServiceImpl implements CheckedOutBookService {
         return checkedOutBookRepository.saveAndFlush(checkedOutBook);
     }
 
+    @Override
+    public void deleteByBook_Id(int bookId) {
+        checkedOutBookRepository.deleteByBook_Id(bookId);
+    }
+
 }

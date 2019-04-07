@@ -8,4 +8,5 @@ public interface CheckedOutBookService {
     List<CheckedOutBook> findByUser_Username(String username);
     List<CheckedOutBook> findByBook_Id(int bookId);
     CheckedOutBook createCheckedOutBook(CheckedOutBook checkedOutBook);
+    void deleteByBook_Id(int bookId);
 }

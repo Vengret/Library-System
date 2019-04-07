@@ -24,16 +24,31 @@
         Browse Recommended Books
     </a>
 
-
-    <div th:fragment="logout" class="logout" sec:authorize="isAuthenticated()">
-        Logged in user: <span sec:authentication="name"></span> |
-        Roles: <span sec:authentication="principal.authorities"></span>
-        <div>
-            <form action="#" th:action="@{/logout}" method="post">
-                <input type="submit" value="Logout"/>
-            </form>
-        </div>
+    <br><hr>
+    <div sec:authorize="hasRole('EMPLOYEE')">
+        <h4>
+            Employee Services
+        </h4>
+        <a th:href="@{/employee/checkIn(bookId = 0)}" class="btn btn-primary btn-sm mb-3">
+            Check in books
+        </a>
+        <a th:href="@{/employee/checkOut(bookId = 0)}" class="btn btn-primary btn-sm mb-3">
+            Check out books
+        </a>
+        <a th:href="@{/employee/addItem}" class="btn btn-primary btn-sm mb-3">
+            Add Item
+        </a>
+        <a th:href="@{/employee/addBook}" class="btn btn-primary btn-sm mb-3">
+            Add book
+        </a>
+        <a th:href="@{/employee/removeBook}" class="btn btn-primary btn-sm mb-3">
+            Remove book
+        </a>
     </div>
+
+    <form action="#" th:action="@{/logout}" method="post">
+        <input type="submit" value="Logout"/>
+    </form>
 
 </body>
 </html>
