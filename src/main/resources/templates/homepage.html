@@ -18,16 +18,17 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
+                <!-- link to home page -->
                 <li class="nav-item active mr-auto">
                     <a class="nav-link" th:href="@{/}">Home <span class="sr-only">(current)</span></a>
                 </li>
 
                 <!-- account dropdown options -->
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="#" id="accountDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Account
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
+                    <div class="dropdown-menu" aria-labelledby="accountDropdown">
                         <a class="dropdown-item" href="#" th:href="@{/user/accountPage}">Account Page</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="javascript: document.logoutForm.submit()"> Logout</a>
@@ -37,12 +38,31 @@
                     </div>
                 </li>
 
+                <!-- employee services dropdown -->
+                <!-- only available for employees -->
+                <li class="nav-item dropdown" sec:authorize="hasRole('EMPLOYEE')">
+                    <a class="nav-link dropdown-toggle" href="#" id="employeeDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Employee Services
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="employeeDropdown">
+                        <a class="dropdown-item" href="#" th:href="@{/employee/checkIn(bookId = 0)}">Check in books</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#" th:href="@{/employee/checkOut(bookId = 0, userId=0)}">Check out books</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#" th:href="@{/employee/addItem}">Add an item</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#" th:href="@{/employee/addBook}">Add a book to inventory</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#" th:href="@{/employee/removeBook}">Remove a book from inventory</a>
+                    </div>
+                </li>
+
                 <!-- browse dropdown options -->
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="#" id="browseDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Browse
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
+                    <div class="dropdown-menu" aria-labelledby="browseDropdown">
                         <a class="dropdown-item" href="#" th:href="@{/collection/list}">All books</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#" th:href="@{/recommended/recommendedBooks}">Recommended books</a>
@@ -50,6 +70,7 @@
                 </li>
             </ul>
 
+            <!-- search option -->
             <form class="form-inline my-2 my-lg-0" action="#" th:action="@{/collection/searchAny}" method="get">
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" th:value="${searchVal}" name="searchVal">
                 <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Search</button>
@@ -57,33 +78,22 @@
         </div>
     </nav>
 
-    <br><hr>
+    <!-- jumbotron -->
+    <div class="jumbotron">
+        <h1 class="display-4">Welcome to Dan's Library!</h1>
+        <p class="lead">This is an application I built to showcase my developer skills.</p>
+        <hr class="my-4">
+        <p>
+            This application was built with Spring Boot. This is designed to work as a mock web-app for a library. On this site, you can explore and reserve books. Be sure to check out your personalized recommended books!
+            A Mahout recommender engine with machine learning was used to create the books you're most likely to enjoy based on your previous reviews.
 
-    <div sec:authorize="hasRole('EMPLOYEE')">
-        <h4>
-            Employee Services
-        </h4>
-        <a th:href="@{/employee/checkIn(bookId = 0)}" class="btn btn-primary btn-sm mb-3">
-            Check in books
-        </a>
-        <a th:href="@{/employee/checkOut(bookId = 0, userId=0)}" class="btn btn-primary btn-sm mb-3">
-            Check out books
-        </a>
-        <a th:href="@{/employee/addItem}" class="btn btn-primary btn-sm mb-3">
-            Add Item
-        </a>
-        <a th:href="@{/employee/addBook}" class="btn btn-primary btn-sm mb-3">
-            Add book
-        </a>
-        <a th:href="@{/employee/removeBook}" class="btn btn-primary btn-sm mb-3">
-            Remove book
-        </a>
+            Thank you for taking the time to visit my application! Enjoy!
+        </p>
+        <a class="btn btn-info btn-lg" href="https://github.com/Vengret" target="_blank" role="button">View my Github page</a>
+        <a class="btn btn-info btn-lg" href="https://www.linkedin.com/in/daniel-hanyak/" target="_blank" role="button">Follow me on LinkedIn</a>
     </div>
 
-    <form action="#" th:action="@{/logout}" method="post">
-        <input type="submit" value="Logout"/>
-    </form>
-
+    <br><hr>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
