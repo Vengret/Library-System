@@ -21,15 +21,14 @@
                 <li class="nav-item active mr-auto">
                     <a class="nav-link" th:href="@{/}">Home <span class="sr-only">(current)</span></a>
                 </li>
+
+                <!-- account dropdown options -->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Account
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
-                        <!--
-                        <a class="nav-link" th:href="@{user/accountPage}">Account Page</a>
-                        -->
-                        <a class="dropdown-item" th:href="@{user/accountPage}">Account Page</a>
+                        <a class="dropdown-item" href="#" th:href="@{/user/accountPage}">Account Page</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="javascript: document.logoutForm.submit()"> Logout</a>
                         <form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">
@@ -37,14 +36,16 @@
                         </form>
                     </div>
                 </li>
+
+                <!-- browse dropdown options -->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Browse
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
-                        <a class="dropdown-item" href="#">All books</a>
+                        <a class="dropdown-item" href="#" th:href="@{/collection/list}">All books</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Recommended books</a>
+                        <a class="dropdown-item" href="#" th:href="@{/recommended/recommendedBooks}">Recommended books</a>
                     </div>
                 </li>
             </ul>
@@ -56,26 +57,8 @@
         </div>
     </nav>
 
-    <br>
-    <hr>
-
-    <h1>Welcome to our new library system!</h1>
-
-    <a th:href="@{/user/accountPage}" class="btn btn-primary btn-sm mb-3">
-        Account page
-    </a>
-
-    <hr>
-
-    <a th:href="@{/collection/list}" class="btn btn-primary btn-sm mb-3">
-        Browse Books
-    </a>
-
-    <a th:href="@{/recommended/recommendedBooks}" class="btn btn-primary btn-sm mb-3">
-        Browse Recommended Books
-    </a>
-
     <br><hr>
+
     <div sec:authorize="hasRole('EMPLOYEE')">
         <h4>
             Employee Services
