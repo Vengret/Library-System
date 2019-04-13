@@ -97,4 +97,22 @@ public class ItemController {
         return "item-list";
     }
 
+    // Allow user to search by any field
+    @GetMapping("searchAny")
+    public String searchAny(Model theModel, @RequestParam String searchVal){
+
+        // Search for item based on string
+        List<Item> itemList = itemService.findByTitleContainingIgnoreCaseOrAuthorContainingIgnoreCaseOrGenreContainingIgnoreCase(searchVal, searchVal, searchVal);
+
+        // Exception handling if nothing is returned
+        if (itemList == null){
+            throw new RuntimeException("No books found with that genre");
+        }
+
+        // Add list of items to the model
+        theModel.addAttribute("items", itemList);
+
+        return "item-list";
+    }
+
 }

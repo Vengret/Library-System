@@ -50,4 +50,11 @@ public class ItemServiceImpl implements ItemService {
     public List<Item> findByGenreContainingIgnoreCase(String search) {
         return itemRepository.findByGenreContainingIgnoreCase(search);
     }
+
+    @Override
+    public List<Item> findByTitleContainingIgnoreCaseOrAuthorContainingIgnoreCaseOrGenreContainingIgnoreCase(String title, String author, String genre) {
+        return itemRepository.findByTitleContainingIgnoreCaseOrAuthorContainingIgnoreCaseOrGenreContainingIgnoreCase(title, author, genre);
+    }
+
+
 }
