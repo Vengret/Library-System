@@ -84,14 +84,14 @@
     </div>
 </nav>
 
-<div class="container">
+<div class="container-fluid">
 
-    <div class="row my-5">
+    <div class="row py-2 mb-5 bg-secondary">
         <!-- search by title -->
         <form action="#" th:action="@{/collection/searchTitle}" method="get" class="col-lg-4 form-inline">
             <div class="form-group">
                 <input type="text" th:value="${titleSearch}" name="titleSearch" placeholder="Search by Title"/>
-                <input type="submit" value="Search By Title" class="btn btn-primary btn-sm ml-1">
+                <input type="submit" value="Search By Title" class="btn btn-info btn-sm ml-1">
             </div>
         </form>
 
@@ -99,7 +99,7 @@
         <form action="#" th:action="@{/collection/searchAuthor}" method="get" class="col-lg-4 form-inline">
             <div class="form-group">
                 <input type="text" th:value="${authorSearch}" name="authorSearch" placeholder="Search by Author"/>
-                <input type="submit" value="Search By Author" class="btn btn-primary btn-sm ml-1">
+                <input type="submit" value="Search By Author" class="btn btn-info btn-sm ml-1">
             </div>
         </form>
 
@@ -139,12 +139,14 @@
                     <option th:value="test" th:text="'Test Preparation'"></option>
                     <option th:value="travel" th:text="'Travel'"></option>
                 </select>
-                <input type="submit" value="Search By Genre" class="btn btn-primary btn-sm ml-1">
+                <input type="submit" value="Search By Genre" class="btn btn-info btn-sm ml-1">
             </div>
         </form>
 
     </div>
+</div>
 
+<div class="container">
     <table class="table table-bordered table-striped">
 
         <thead class="thead-dark">
@@ -164,7 +166,7 @@
             <td th:text="${tempItem.getAuthor()}"></td>
             <td th:text="${tempItem.getGenre()}"></td>
             <td>
-                <a th:href="@{/books/list(itemId=${tempItem.getItemId()})}" class="btn btn-primary btn-sm mb-3">
+                <a th:href="@{/books/list(itemId=${tempItem.getItemId()})}" class="btn btn-info btn-sm mb-3">
                     Check Availability
                 </a>
             </td>
