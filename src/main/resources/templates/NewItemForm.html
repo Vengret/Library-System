@@ -3,7 +3,7 @@
       xmlns:form="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Catalog</title>
+    <title>Add Item</title>
 
     <!-- Required meta tags -->
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -14,8 +14,8 @@
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet'  type='text/css'>
 
 </head>
-<body>
 
+<body>
 <!-- NAVBAR. every page should have this -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="text-info display-4" style="font-family: Josefin Slab" th:href="@{/}">DAN'S LIBRARY</a>
@@ -85,31 +85,38 @@
     </div>
 </nav>
 
-
 <div class="container">
     <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 mx-auto">
-        <form class="text-center border border-info p-5 form-horizontal" action="#" th:action="@{/reviews/confirmReview(userId=${userId}, itemId=${itemId})}" th:object="${reviewObject}" method="post" style="margin-top: 50px">
-            <p class="h4 mb-4 text-info">Leave a review</p>
-            <span class="text-info">Rating</span>
+        <form class="text-center border border-info p-5 form-horizontal" action="#" th:action="@{/employee/addItem(added=true)}" th:object="${item}" method="post" style="margin-top: 50px">
+            <p class="h4 mb-4 text-info">Add Item</p>
+
+            <span class="text-info">Image url</span>
             <div style="margin-bottom: 25px" class="input-group">
-                <select th:field="*{value}" class="form-control">
-                    <option th:each="i : ${#numbers.sequence(1,5)}" th:value="${i}" th:text="${i}"></option>
-                </select>
+                <input id="cover" type="text" name="cover" placeholder="Cover URL" th:field="*{cover}" class="form-control">
             </div>
-            <span class="text-info">Leave a comment</span>
+
+            <span class="text-info">Title</span>
             <div style="margin-bottom: 25px" class="input-group">
-                <textarea th:field="*{content}" class="form-control"></textarea>
+                <input id="title" type="text" name="title" placeholder="Title" th:field="*{title}" class="form-control">
             </div>
+
+            <span class="text-info">Author</span>
+            <div style="margin-bottom: 25px" class="input-group">
+                <input id="author" type="text" name="author" placeholder="Author" th:field="*{author}" class="form-control">
+            </div>
+
+            <span class="text-info">Genre</span>
+            <div style="margin-bottom: 25px" class="input-group">
+                <input id="genre" type="text" name="genre" placeholder="genre" th:field="*{genre}" class="form-control">
+            </div>
+
             <div style="margin-top: 6px; margin-left: auto" class="form-group">
                 <input type="submit" value="Submit" class="btn btn-info">
             </div>
+
         </form>
     </div>
 </div>
-
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
 </body>
 </html>

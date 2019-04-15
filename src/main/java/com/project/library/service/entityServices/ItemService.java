@@ -11,4 +11,5 @@ public interface ItemService {
     List<Item> findByAuthorContainingIgnoreCase(String search);
     List<Item> findByGenreContainingIgnoreCase(String search);
     List<Item> findByTitleContainingIgnoreCaseOrAuthorContainingIgnoreCaseOrGenreContainingIgnoreCase(String title, String author, String genre);
+    Item createItem(Item item);
 }

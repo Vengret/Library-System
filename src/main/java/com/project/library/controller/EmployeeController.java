@@ -4,10 +4,7 @@ Request mappings for employee related pages
 
 package com.project.library.controller;
 
-import com.project.library.entities.Book;
-import com.project.library.entities.BorrowedBook;
-import com.project.library.entities.CheckedOutBook;
-import com.project.library.entities.User;
+import com.project.library.entities.*;
 import com.project.library.service.entityServices.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -102,15 +99,17 @@ public class EmployeeController {
     }
 
     @RequestMapping("addItem")
-    public String addItem(){
+    public String addItem(Model theModel, @ModelAttribute("item") Item item, @RequestParam(required = false, defaultValue = "false") boolean added){
 
-        // if form passed in
+        // if form passed in, save the item
+        if(added == true){
+            Item theItem = itemService.createItem(item);
+        }
 
-            // create Item
+        // add blank item for form
+        theModel.addAttribute("item", new Item());
 
-            // save item
-
-        return "addItem";
+        return "NewItemForm";
     }
 
     @RequestMapping("/addBook")
