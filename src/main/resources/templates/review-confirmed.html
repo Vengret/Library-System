@@ -84,39 +84,28 @@
     </div>
 </nav>
 
-    <h3>
-        Thank you for reviewing <span th:text="${review.getReviewId().getItem().getTitle()}"></span>
-    </h3>
-
-    <table class="table table-bordered table-striped">
-
-        <thead class="thead-dark">
-        <tr>
-            <th>Cover</th>
-            <th>Title</th>
-            <th>Rating</th>
-            <th>Content</th>
-        </tr>
-        </thead>
-
-        <tbody>
-        <tr>
-            <td><img th:src="${review.getReviewId().getItem().getCover()}" border="3" height="200" width="140"> </td>
-            <td th:text="${review.getReviewId().getItem().getTitle()}"></td>
-            <td th:text="${review.getValue()}"></td>
-            <td th:text="${review.getContent()}"></td>
-        </tr>
-        </tbody>
-
-    </table>
-
-    <a th:href="@{/user/accountPage}" class="btn btn-primary btn-sm mb-3">
-        Back to account page
-    </a>
-    <br>
-    <a th:href="@{/}" class="btn btn-primary btn-sm mb-3">
-        Back to home page
-    </a>
+<div class="container border border-info mt-5 col-md-8 px-0 rounded" style="font-family: Josefin Slab">
+    <div class="col-expand col-md-offset-2 mx-auto text-center">
+        <div class="text-light bg-secondary">
+            <td>
+                <h1>Thank you for reviewing:</h1>
+                <br>
+                <h1 th:text="${review.getReviewId().getItem().getTitle()}"></h1>
+            </td>
+        </div>
+        <div class="row">
+            <div class="col-md-12 mb-5">
+                <img th:src="${review.getReviewId().getItem().getCover()}" border="3" height="200" width="140">
+                <div class="text-dark mb-3" style="font-size: 18px">
+                    <span th:text="${review.getReviewId().getItem().getTitle()}"></span>
+                </div>
+                <div class="text-dark" style="font-size: 18px">
+                    <span th:text="'Your rating: ' + ${review.getValue()}"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
