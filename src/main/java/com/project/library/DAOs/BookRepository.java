@@ -4,7 +4,9 @@ import com.project.library.entities.Book;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -21,5 +23,9 @@ public interface BookRepository extends JpaRepository<Book, Integer> {
     @Modifying
     @Query("UPDATE Book b SET b.status = :status, b.due_date = :due_date WHERE b.id = :bookId")
     int updateBook(@Param("bookId") int bookId, @Param("status") String status, @Param("due_date") String due_date);
+
+    // method to remove book from inventory
+    @Transactional
+    void deleteBookById(int bookId);
 
 }

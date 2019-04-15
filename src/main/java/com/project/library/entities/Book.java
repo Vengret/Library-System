@@ -6,14 +6,14 @@ For example, if the library has 5 copies of the same book, there will be one ite
 
 package com.project.library.entities;
 
-import org.springframework.stereotype.Controller;
-
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "book")
-public class Book {
+public class Book implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -32,11 +32,6 @@ public class Book {
     @Column(name = "due_date")
     private String due_date;
 
-    // tracks condition of book
-    // may be worth creating a condition enum
-    @Column(name = "condition")
-    private String condition;
-
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "book", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     private List<ReservedBook> reservedBookList;
 
@@ -47,11 +42,10 @@ public class Book {
 
     public Book(){}
 
-    public Book(Item item, String status, String due_date, String condition, List<ReservedBook> reservedBookList, List<CheckedOutBook> checkedOutBooks) {
+    public Book(Item item, String status, String due_date, List<ReservedBook> reservedBookList, List<CheckedOutBook> checkedOutBooks) {
         this.item = item;
         this.status = status;
         this.due_date = due_date;
-        this.condition = condition;
         this.reservedBookList = reservedBookList;
         this.checkedOutBooks = checkedOutBooks;
     }
@@ -91,14 +85,6 @@ public class Book {
         this.due_date = due_date;
     }
 
-    public String getCondition() {
-        return condition;
-    }
-
-    public void setCondition(String condition) {
-        this.condition = condition;
-    }
-
     public List<ReservedBook> getReservedBookList() {
         return reservedBookList;
     }
@@ -122,9 +108,26 @@ public class Book {
                 ", item=" + item +
                 ", status='" + status + '\'' +
                 ", due_date='" + due_date + '\'' +
-                ", condition='" + condition + '\'' +
                 ", reservedBookList=" + reservedBookList +
                 ", checkedOutBooks=" + checkedOutBooks +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Book book = (Book) o;
+        return id == book.id &&
+                Objects.equals(item, book.item) &&
+                Objects.equals(status, book.status) &&
+                Objects.equals(due_date, book.due_date) &&
+                Objects.equals(reservedBookList, book.reservedBookList) &&
+                Objects.equals(checkedOutBooks, book.checkedOutBooks);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, item, status, due_date, reservedBookList, checkedOutBooks);
     }
 }

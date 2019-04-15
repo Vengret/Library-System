@@ -2,7 +2,7 @@
 This object is used just to capture data from the review form because html is only passing ints and strings when I need a float value
  */
 
-package com.project.library.entities;
+package com.project.library.entities.FormObjects;
 
 public class ReviewFormObject {
     private int value;

@@ -9,4 +9,6 @@ public interface BookService {
     Book findById(int id);
     void setStatus(int bookId, String status);
     void updateBook(int bookId, String status, String dueDate);
+    Book createBook(Book book);
+    void deleteBookById(int bookId);
 }

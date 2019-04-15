@@ -6,9 +6,14 @@ package com.project.library.service.entityServices;
 
 import com.project.library.DAOs.BookRepository;
 import com.project.library.entities.Book;
+import com.project.library.entities.Item;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.provider.HibernateUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.hibernate.cfg.Configuration;
 
 import java.util.List;
 import java.util.Optional;
@@ -54,6 +59,17 @@ public class BookServiceImpl implements BookService {
     @Transactional
     public void updateBook(int bookId, String status, String dueDate) {
         bookRepository.updateBook(bookId, status, dueDate);
+    }
+
+    @Override
+    @Transactional
+    public Book createBook(Book book) {
+        return bookRepository.save(book);
+    }
+
+    @Override
+    public void deleteBookById(int bookId) {
+        bookRepository.deleteBookById(bookId);
     }
 
 

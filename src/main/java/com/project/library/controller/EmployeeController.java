@@ -5,6 +5,7 @@ Request mappings for employee related pages
 package com.project.library.controller;
 
 import com.project.library.entities.*;
+import com.project.library.entities.FormObjects.BookFormObject;
 import com.project.library.service.entityServices.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -102,8 +103,8 @@ public class EmployeeController {
     public String addItem(Model theModel, @ModelAttribute("item") Item item, @RequestParam(required = false, defaultValue = "false") boolean added){
 
         // if form passed in, save the item
-        if(added == true){
-            Item theItem = itemService.createItem(item);
+        if(added){
+            itemService.createItem(item);
         }
 
         // add blank item for form
@@ -113,23 +114,35 @@ public class EmployeeController {
     }
 
     @RequestMapping("/addBook")
-    public String addBooks(){
+    public String addBooks(Model theModel, @RequestParam(required = false, defaultValue = "false") boolean added, @ModelAttribute("bookForm") BookFormObject bookFormObject){
 
-        // if form passed in
+        // if form passed in, save x number of new books
+        if(added){
+            Item assignedItem = itemService.findById(bookFormObject.getItemId());
+            for (int i = 0; i < bookFormObject.getNumBooks(); ++i){
+                Book newBook = new Book();
+                newBook.setItem(assignedItem);
+                newBook.setStatus("Available");
+                bookService.createBook(newBook);
+            }
+        }
 
-            // create Book
+        // add blank book form
+        theModel.addAttribute("bookForm", new BookFormObject());
 
-            // save book
-
-        return "addBooks";
+        return "NewBookForm";
     }
 
     @RequestMapping("removeBook")
-    public String removeBooks(){
+    public String removeBooks(Model theModel, @RequestParam(required = false, defaultValue = "false") boolean removed, @ModelAttribute("bookForm") BookFormObject bookFormObject){
 
-        // if form passed in
+        // if form passed in, delete book with matching id
+        if(removed){
+            bookService.deleteBookById(bookFormObject.getItemId());
+        }
 
-            // Remove book
+        // add blank book form
+        theModel.addAttribute("bookForm", new BookFormObject());
 
         return "removeBooks";
     }
