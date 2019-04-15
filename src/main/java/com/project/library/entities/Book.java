@@ -32,10 +32,10 @@ public class Book implements Serializable {
     @Column(name = "due_date")
     private String due_date;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "book", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "book", cascade = {CascadeType.ALL})
     private List<ReservedBook> reservedBookList;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "book", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "book", cascade = {CascadeType.ALL})
     private List<CheckedOutBook> checkedOutBooks;
 
     // Constructors

@@ -30,13 +30,13 @@ public class Item{
     @Column(name = "genre")
     private String genre;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "item", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "item", cascade = {CascadeType.ALL})
     private List<Book> bookList;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "item", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "item", cascade = {CascadeType.ALL})
     private List<BorrowedBook> borrowedBookList;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "reviewId.item", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "reviewId.item", cascade = {CascadeType.ALL})
     private List<Review> reviewList;
 
     public Item(){}

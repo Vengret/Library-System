@@ -50,15 +50,17 @@ public class User {
     @Column(name = "balance")
     private BigDecimal balance;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = {CascadeType.ALL})
     private List<BorrowedBook> borrowedBookList;
 
+    // Cascade type chosen because we want to keep their reviews. It's beneficial for us to keep reviews, even if the user left the library system
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "reviewId.user", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     private List<Review> reviewList;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = {CascadeType.ALL})
     private List<ReservedBook> reservedBookList;
 
+    // Cascade type chosen because we want to track books that may still be out of cycle even if the user deleted their account
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     private List<CheckedOutBook> checkedOutBooks;
 
