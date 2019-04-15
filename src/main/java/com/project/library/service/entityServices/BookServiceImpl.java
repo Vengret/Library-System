@@ -64,7 +64,7 @@ public class BookServiceImpl implements BookService {
     @Override
     @Transactional
     public Book createBook(Book book) {
-        return bookRepository.save(book);
+        return bookRepository.saveAndFlush(book);
     }
 
     @Override

@@ -31,7 +31,7 @@ public class ReviewServiceImpl implements ReviewService{
     // Method to save a review to database
     @Override
     public Review createReview(Review review) {
-        return reviewRepository.save(review);
+        return reviewRepository.saveAndFlush(review);
     }
 
     @Override

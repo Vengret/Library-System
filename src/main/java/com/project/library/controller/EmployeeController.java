@@ -82,7 +82,7 @@ public class EmployeeController {
             reservedBookService.deleteByBook_Id(bookId);
 
             // create borrowed book item
-            BorrowedBook borrowedBook = new BorrowedBook(userService.findById(userId), itemService.findById(bookService.findById(bookId).getId()), dueDate);
+            BorrowedBook borrowedBook = new BorrowedBook(userService.findById(userId), bookService.findById(bookId).getItem(), dueDate);
 
             // add borrowed book to table
             borrowedBookService.createBorrowedBook(borrowedBook);

@@ -60,7 +60,7 @@ public class ItemServiceImpl implements ItemService {
     @Override
     @Transactional
     public Item createItem(Item item) {
-        return itemRepository.save(item);
+        return itemRepository.saveAndFlush(item);
     }
 
 
